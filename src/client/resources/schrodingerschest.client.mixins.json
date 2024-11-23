@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "de.qwatrum.schrodingerschest.mixin.client",
+  "compatibilityLevel": "JAVA_20",
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
