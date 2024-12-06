@@ -8,34 +8,26 @@ import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.context.LootContextParameterSet;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleType;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -138,7 +130,7 @@ public class Schrodingerschest implements ModInitializer {
         UseBlockCallback.EVENT.register(((player, world, hand, hitResult) -> {
             BlockPos pos = hitResult.getBlockPos();
             Block block = world.getBlockState(pos).getBlock();
-            // Notfalls mit trapped chest alles machen und immer random einf.
+
             if (block == Blocks.CHEST) {
                 ItemStack itemHand = player.getStackInHand(hand);
                 if (itemHand.getItem() == ModItems.SCHRODINGERS_STAFF) {
@@ -146,8 +138,6 @@ public class Schrodingerschest implements ModInitializer {
                     if (world.getBlockEntity(pos) instanceof ChestBlockEntity chestBlockEntity) {
                         if (!world.isClient()) {
                             newLoot((ServerWorld) world, chestBlockEntity, player);
-                        } else {
-                            chestEffects(world, chestBlockEntity, player);
                         }
 
                         return ActionResult.SUCCESS;
@@ -159,21 +149,19 @@ public class Schrodingerschest implements ModInitializer {
 
                     if (world.getBlockEntity(pos) instanceof ChestBlockEntity chestBlockEntity) {
                         if (!world.isClient()) {
-                            newLoot((ServerWorld) world, chestBlockEntity, player);
-                        } else {
-                            chestEffects(world, chestBlockEntity, player);
+                            changeLoot((ServerWorld) world, chestBlockEntity, player);
                         }
+
                         return ActionResult.SUCCESS;
                     }
                 }
             }
-
             return ActionResult.PASS;
         }));
     }
 
     private void newLoot(ServerWorld world, ChestBlockEntity chest, PlayerEntity player) {
-
+        LOGGER.info(String.valueOf(chest.getLootTable()));
         if (chest.getLootTable() != null) {
             chest.clear();
             chest.setLootTable(chest.getLootTable(), world.getRandom().nextLong());
@@ -182,6 +170,31 @@ public class Schrodingerschest implements ModInitializer {
 
         }
     }
+
+    private void changeLoot(ServerWorld world, ChestBlockEntity chest, PlayerEntity player) {
+
+        int stackCount = 0;
+        int slot = -1;
+        int count = 0;
+
+        for (int i=0; i<27; i++) {
+
+            if (chest.getStack(i).getItem() != Items.AIR) {
+                stackCount++;
+                slot = i;
+                count = chest.getStack(i).getCount();
+            }
+        }
+
+        if (stackCount == 1) {
+            ItemStack newItem = generateRandomItem();
+            newItem.setCount(count);
+            chest.setStack(slot, newItem);
+            playSound(player);
+            relic_spawn(world, player);
+        }
+    }
+
 
     private void relic_spawn(ServerWorld world, PlayerEntity player) {
         Random random = new Random();
@@ -215,26 +228,8 @@ public class Schrodingerschest implements ModInitializer {
         }
 
     }
-    public void chestEffects(World world, ChestBlockEntity chest, PlayerEntity player) {
 
-        if (chest.getLootTable() != null) {
-            if (world.isClient()) {
 
-                int particleCount = 12;
-                double radius = 0.05;
-
-                for(int i=0;i<particleCount;i++) {
-                    double angle = 2* Math.PI * i / particleCount;
-                    double offsetX = radius*Math.cos(angle);
-                    double offsetZ = radius*Math.sin(angle);
-
-                    world.addParticle(ParticleTypes.DRAGON_BREATH, player.getX(), player.getY()+1,player.getZ(), offsetX, 0.0, offsetZ);
-                }
-
-            }
-
-        }
-    }
     public void playSound(PlayerEntity player) {
         World world = player.getWorld();
         world.playSound(null, player.getBlockPos(), SoundEvents.BLOCK_AMETHYST_BLOCK_STEP, SoundCategory.BLOCKS, 1000, 1);
@@ -259,7 +254,16 @@ public class Schrodingerschest implements ModInitializer {
             case 9 -> player.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 200, 4));
         }
 
+    }
 
-
+    public ItemStack generateRandomItem() {
+        Random random = new Random();
+        ArrayList<Item> items = new ArrayList<>();
+        Registries.ITEM.stream().forEach(item -> {
+            if (item != Items.AIR) {
+                items.add(item);
+            }
+        });
+        return new ItemStack(items.get(random.nextInt(items.size())));
     }
 }
