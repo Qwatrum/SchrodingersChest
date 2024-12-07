@@ -20,7 +20,6 @@ public class ModItems {
             new PickaxeItem(ModToolMaterials.RELIC, new Item.Settings().attributeModifiers(PickaxeItem.createAttributeModifiers(ModToolMaterials.RELIC, 1, -2.8f))));
     public static final Item RELIC_AXE = registerItem("relic_axe",
             new AxeItem(ModToolMaterials.RELIC, new Item.Settings().attributeModifiers(AxeItem.createAttributeModifiers(ModToolMaterials.RELIC, 1, -3.2f))));
-//public static final Item SCHRODINGERS_BREAKFAST = registerItem("schrodingers_breakfast", new Item(new Item.Settings().food(ModFoodComponents.SCHRODINGERS_BREAKFAST).maxCount(1)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(Schrodingerschest.MOD_ID, name), item);

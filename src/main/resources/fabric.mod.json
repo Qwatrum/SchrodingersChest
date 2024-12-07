@@ -4,9 +4,9 @@
   "version": "1.0",
   "name": "SchrodingersChest",
   "description": "",
-  "authors": [],
+  "authors": ["Qwatrum"],
   "contact": {},
-  "license": "All-Rights-Reserved",
+  "license": "MIT License",
   "icon": "assets/schrodingerschest/icon.png",
   "environment": "*",
   "entrypoints": {
