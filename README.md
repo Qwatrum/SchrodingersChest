@@ -4,7 +4,9 @@ Schrodingerschest
 ###### SchrodingersChest is a Fabric Minecraft mod adding stuff like Schrödingers ~~Cat~~ Chest
 
 ------------
-Download here for free on Modrinth (**TODO**)
+### [Download here for free on Modrinth](https://modrinth.com/mod/schrodingers-chest "Modrinth")
+
+
 ## Demo video:
 pass (**TODO**)
 
@@ -50,7 +52,7 @@ pass (**TODO**)
   * You'll get one of 10 random effects (poison, speed, ...)
 
 ## How to use:
-* Download the .jar on Modrinth **here** (**TODO**)
+* Download the .jar on Modrinth [here](https://modrinth.com/mod/schrodingers-chest "Modrinth")
 * Use Minecraft 1.21.1 and Fabric
 
 ## The idea behind this:
@@ -66,4 +68,4 @@ I thought this is a funny minecraft mod idea.
 * Code: Qwatrum
 * Design: Qwatrum
 
-made with <3
+made with <3 by Qwatrum
