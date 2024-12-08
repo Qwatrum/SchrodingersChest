@@ -36,27 +36,27 @@ pass (**TODO**)
   * Relic Axe, Relic Pickaxe, Relic Sword
   * Crafted like this:
   
-  ![recipe1](pictures/pic%20(2).png)
-  ![recipe1](pictures/pic%20(3).png)
-  ![recipe1](pictures/pic%20(4).png)
+  ![recipe2](pictures/pic%20(2).png)
+  ![recipe3](pictures/pic%20(3).png)
+  ![recipe4](pictures/pic%20(4).png)
 
   * Using them immediately is a bad idea ... hit an entity to detect what material they are made of
-  * For example: You craft a Relic Sword. You hit a zombie. And the sword decided its state. Maybe it's a wooden sword or even made out of diamonds?
+  * For example: You craft a Relic Sword. You hit a zombie. And the sword decides its state. Maybe it's a wooden sword or even made out of diamonds?
   
   ### Schrodingers Breakfast:
     _You like the surprise effect when you eat something?_
   * Crafted like this:
   
-  ![recipe1](pictures/pic%20(5).png)
+  ![recipe5](pictures/pic%20(5).png)
   * Right click to eat
   * You'll get one of 10 random effects (poison, speed, ...)
 
 ## How to use:
 * Download the .jar on Modrinth [here](https://modrinth.com/mod/schrodingers-chest "Modrinth")
-* Use Minecraft 1.21.1 and Fabric
+* Use **Minecraft 1.21.1** and **Fabric**
 
 ## The idea behind this:
-Maybe you know Schrödingers Cat. Erwin Schrödinger was a scientist doing research on quantum mechanics, particular the Schrödingers equation and his thought experiment **Schrödinger's Cat**.
+Maybe you know Schrödinger's Cat. Erwin Schrödinger was a scientist doing research on quantum mechanics, particular the Schrödinger's equation and his thought experiment **Schrödinger's Cat**.
 The cat is in a sealed box alive and dead at the same time until observed due to the paradox of applying quantum mechanics on something like a cat.
 
 I took this as inspiration and created **Schrödingers Chest**. The content of the chest is changeable (using the staff on structure chests or trapped chest) and you don't exactly know what you get until you open the chest / observe the inside.
