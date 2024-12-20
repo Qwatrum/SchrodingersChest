@@ -54,6 +54,7 @@ pass (**TODO**)
 ## How to use:
 * Download the .jar on Modrinth [here](https://modrinth.com/mod/schrodingers-chest "Modrinth")
 * Use **Minecraft 1.21.1** and **Fabric**
+* Or clone the repo and compile it on your own
 
 ## The idea behind this:
 Maybe you know Schrödinger's Cat. Erwin Schrödinger was a scientist doing research on quantum mechanics, particular the Schrödinger's equation and his thought experiment **Schrödinger's Cat**.
